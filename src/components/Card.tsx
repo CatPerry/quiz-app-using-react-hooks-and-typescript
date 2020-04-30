@@ -28,10 +28,10 @@ const Card = (props: any) => {
     revealAnswer: '',
   };
   
-  // These two variable below can be called anything, but we'll name them `state` and `setState` for convention
+  // These two variable below can be called anything, but we'll name them `state` and `setState` for convention.
   const [state, setState] = useState(initialState);
-  // The are variables that we'll refer to throughout this component, so we'll set them on state here. If there are variables you
-  // are not referring to outside of the setState({}) funciton elsewhere, they dont need to be delcared here, but can be set above.
+  // These are variables that we'll refer to throughout this component, so we'll set them on state here. If there are variables you
+  // are not referring to outside of the setState({}) funciton elsewhere, they dont need to be delcared here, but can be just set above.
   const {
     currentIndex,
     score,
