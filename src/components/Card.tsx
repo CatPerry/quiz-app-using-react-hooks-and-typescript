@@ -17,6 +17,8 @@ interface Props {
 
 const Card = (props: any) => {
   const quizQuestions = _.get(props, 'quizQuestions.results', undefined);
+  // Here is another way to set state using React Hooks. This is a neater approach than setting them individually like you'll see
+  // in Main.tsx. Just set an object.
   const initialState = {
     currentIndex: 0,
     score: 0,
@@ -25,8 +27,11 @@ const Card = (props: any) => {
     selectedOption: '',
     revealAnswer: '',
   };
-
+  
+  // These two variable below can be called anything, but we'll name them `state` and `setState` for convention
   const [state, setState] = useState(initialState);
+  // The are variables that we'll refer to throughout this component, so we'll set them on state here. If there are variables you
+  // are not referring to outside of the setState({}) funciton elsewhere, they dont need to be delcared here, but can be set above.
   const {
     currentIndex,
     score,
@@ -46,7 +51,6 @@ const Card = (props: any) => {
       answered: isCorrect ? true : false,
       revealAnswer: renderAnswer
     });
-
 
     if (currentIndex + 1 > props.quizQuestions.results.length) {
       setState({ ...state, showFinished: true });
