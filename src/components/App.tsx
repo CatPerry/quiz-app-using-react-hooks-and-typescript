@@ -1,22 +1,25 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
 
+import Card from './Card';
 import MainContainer from './Main';
 
-export default function App() {
+export const App: FunctionComponent = () => {
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route path="/">
-            <MainContainer />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div>
+      <Switch>
+        <Route path="/:question">
+          <Card />
+        </Route>
+        <Route exact path="/">
+          <MainContainer />
+        </Route>
+      </Switch>
+    </div>
   );
-}
+};
+
+export default App;

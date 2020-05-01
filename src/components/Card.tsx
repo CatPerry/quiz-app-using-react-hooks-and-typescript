@@ -1,22 +1,15 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  // Link,
-  // Route,
-  // Switch,
-  // useRouteMatch
-} from 'react-router-dom';
 
 import * as Models from './../models';
 import './Card.scss';
 
 interface Props {
-  quizQuestions: Models.Quiz[];
+  quizQuestions?: Models.QuizResponse;
 }
 
-const Card = (props: any) => {
-  const quizQuestions = _.get(props, 'quizQuestions.results', undefined);
+const Card = (props: Props) => {
+  const quizQuestions = _.get(props, 'quizQuestions.results', []);
   // Here is another way to set state using React Hooks. This is a neater approach than setting them individually like you'll see
   // in Main.tsx. Just set an object.
   const initialState = {
@@ -27,7 +20,7 @@ const Card = (props: any) => {
     selectedOption: '',
     revealAnswer: '',
   };
-  
+
   // These two variable below can be called anything, but we'll name them `state` and `setState` for convention.
   const [state, setState] = useState(initialState);
   // These are variables that we'll refer to throughout this component, so we'll set them on state here. If there are variables you
@@ -52,7 +45,7 @@ const Card = (props: any) => {
       revealAnswer: renderAnswer
     });
 
-    if (currentIndex + 1 > props.quizQuestions.results.length) {
+    if (currentIndex + 1 > quizQuestions.length) {
       setState({ ...state, showFinished: true });
     } else {
       // delay for question auto-advance, to display 'Correct' or 'Incorrect' feedback
@@ -69,9 +62,8 @@ const Card = (props: any) => {
   };
 
   return (
-    quizQuestions && (currentIndex < props.quizQuestions.results.length) ?
-      <Router>
-
+    quizQuestions && quizQuestions.length > 0 && (currentIndex < quizQuestions.length) ?
+      <div>
         <h2>{quizQuestions[currentIndex].category}</h2>
         <main className='Card'>
           <h1>{_.unescape(quizQuestions[currentIndex].question)}</h1>
@@ -96,10 +88,9 @@ const Card = (props: any) => {
         <footer className='Badge'>
           Question {currentIndex + 1}/{quizQuestions.length}
         </footer>
-
-      </Router>
+      </div>
       :
-      <Router>
+      <div>
         <main className='Card'>
           <h3>
             You scored {score} / {quizQuestions.length}
@@ -109,7 +100,7 @@ const Card = (props: any) => {
             Start Over
           </button>
         </main >
-      </Router>
+      </div>
   );
 };
 

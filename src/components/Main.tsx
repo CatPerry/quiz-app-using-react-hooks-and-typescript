@@ -4,7 +4,7 @@ import * as Models from './../models';
 import Card from './Card';
 import './Main.scss';
 
-const MainContainer: FunctionComponent<{ initial?: Models.QuizResponse[]; }> = ({ initial = {} }) => {
+const MainContainer: FunctionComponent<{ initial?: Models.QuizResponse; }> = ({ initial }) => {
   // Below is one way state is set using React Hooks, where the first deconstructed variable`quizzes` is the state variable name 
   // and `setQuizzes` is the methodName called to update the quizzes state if needed. Here, use it after the data is fetched successfully. 
   const [quizzes, setQuizzes] = useState(initial);
@@ -16,8 +16,8 @@ const MainContainer: FunctionComponent<{ initial?: Models.QuizResponse[]; }> = (
       .then((res) => setQuizzes(res))
       .catch((err) => console.log(err));
   };
-  
-  // useEffect is a React hook equivalent to React Lifecycle Method componenDidMount()
+
+  // useEffect is a React hook equivalent to React Lifecycle Method (RLM) componenDidMount() among other RLMs
   useEffect(() => {
     fetchData();
   }, []);
