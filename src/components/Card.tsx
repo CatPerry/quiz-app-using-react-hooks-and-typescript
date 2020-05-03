@@ -11,7 +11,7 @@ interface Props {
 const Card = (props: Props) => {
   const quizQuestions = _.get(props, 'quizQuestions.results', []);
   // Here is another way to set state using React Hooks. This is a neater approach than setting them individually like you'll see
-  // in Main.tsx. Just set an object.
+  // in Main.tsx. This approach is great for larger states.
   const initialState = {
     currentIndex: 0,
     score: 0,
@@ -55,7 +55,7 @@ const Card = (props: Props) => {
     }
   };
 
-  const renderAnswer = (): React.ReactNode => {
+  const renderAnswer = (): React.ReactFragment => {
     return (
       <>{revealAnswer}</>
     );

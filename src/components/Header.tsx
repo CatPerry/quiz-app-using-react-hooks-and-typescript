@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   BrowserRouter as Router
 } from 'react-router-dom';
 
-const Header = (props: {}) => {
+const Header: FunctionComponent = (props: {}) => {
   return (
     <Router>
       <div className="Header">
